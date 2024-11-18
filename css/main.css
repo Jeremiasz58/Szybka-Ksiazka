@@ -1,0 +1,10 @@
+.c-img {
+    width: 50%;
+    height: auto;
+    object-fit: cover;
+}
+
+.c-item {
+    width: 700px;
+    height: auto;
+}

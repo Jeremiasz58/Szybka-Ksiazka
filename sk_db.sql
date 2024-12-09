@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 18 Lis 2024, 08:17
+-- Czas generowania: 09 Gru 2024, 08:01
 -- Wersja serwera: 10.4.24-MariaDB
 -- Wersja PHP: 8.0.19
 
@@ -57,9 +57,32 @@ CREATE TABLE `ksiazka` (
 --
 
 INSERT INTO `ksiazka` (`id_ksiazki`, `tytul`, `id_autora`) VALUES
-(1, 'Test', 1),
-(2, 'Test', 1),
-(3, 'Test', 1);
+(2, 'Testedit2', 1),
+(3, 'Testedit', 1),
+(4, 'Testedit', 1),
+(5, 'Testedit', 1),
+(6, 'Testedit', 1),
+(7, 'Testedit', 1),
+(8, 'Księga1', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `ksiegarnia_ksiazka`
+--
+
+CREATE TABLE `ksiegarnia_ksiazka` (
+  `id_ksiegarni` int(11) NOT NULL,
+  `id_ksiazki` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Zrzut danych tabeli `ksiegarnia_ksiazka`
+--
+
+INSERT INTO `ksiegarnia_ksiazka` (`id_ksiegarni`, `id_ksiazki`) VALUES
+(13, 2),
+(13, 8);
 
 -- --------------------------------------------------------
 
@@ -72,17 +95,17 @@ CREATE TABLE `ksiegarnie` (
   `nazwa` char(45) DEFAULT NULL,
   `id_miasta` int(11) NOT NULL,
   `ulica` char(45) DEFAULT NULL,
-  `kod_pocztowy` char(10) DEFAULT NULL
+  `kod_pocztowy` char(10) DEFAULT NULL,
+  `mapa` longtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Zrzut danych tabeli `ksiegarnie`
 --
 
-INSERT INTO `ksiegarnie` (`id_ksiegarni`, `nazwa`, `id_miasta`, `ulica`, `kod_pocztowy`) VALUES
-(6, 'Test', 1, 'Test_u', 'test_k'),
-(7, 'Test', 1, 'Test_u', 'test_k'),
-(8, 'Test', 1, 'Test_u', 'test_k');
+INSERT INTO `ksiegarnie` (`id_ksiegarni`, `nazwa`, `id_miasta`, `ulica`, `kod_pocztowy`, `mapa`) VALUES
+(13, 'Test', 1, 'Testowa 1', '01-001', 'https://maps.app.goo.gl/yyDWrDsoJugrniTr6'),
+(14, 'Victoria', 2, 'Wolności 299', '41-800', 'https://maps.app.goo.gl/gx32Bzh3m5oC7j6A8');
 
 -- --------------------------------------------------------
 
@@ -102,7 +125,8 @@ CREATE TABLE `miasta` (
 
 INSERT INTO `miasta` (`id_miasta`, `nazwa`, `id_woj`) VALUES
 (1, 'Gliwice', 1),
-(2, 'Zabrze', 1);
+(2, 'Zabrze', 1),
+(3, 'Bytom', 1);
 
 -- --------------------------------------------------------
 
@@ -140,6 +164,13 @@ ALTER TABLE `ksiazka`
   ADD KEY `for_k_ksiazka_autor` (`id_autora`);
 
 --
+-- Indeksy dla tabeli `ksiegarnia_ksiazka`
+--
+ALTER TABLE `ksiegarnia_ksiazka`
+  ADD KEY `for_k_ksieg_ksiazka_ksieg` (`id_ksiegarni`),
+  ADD KEY `for_k_ksieg_ksiazka_ksiazka` (`id_ksiazki`);
+
+--
 -- Indeksy dla tabeli `ksiegarnie`
 --
 ALTER TABLE `ksiegarnie`
@@ -173,19 +204,19 @@ ALTER TABLE `autorzy`
 -- AUTO_INCREMENT dla tabeli `ksiazka`
 --
 ALTER TABLE `ksiazka`
-  MODIFY `id_ksiazki` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_ksiazki` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT dla tabeli `ksiegarnie`
 --
 ALTER TABLE `ksiegarnie`
-  MODIFY `id_ksiegarni` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_ksiegarni` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT dla tabeli `miasta`
 --
 ALTER TABLE `miasta`
-  MODIFY `id_miasta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_miasta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT dla tabeli `wojewodztwa`
@@ -202,6 +233,13 @@ ALTER TABLE `wojewodztwa`
 --
 ALTER TABLE `ksiazka`
   ADD CONSTRAINT `for_k_ksiazka_autor` FOREIGN KEY (`id_autora`) REFERENCES `autorzy` (`id_autora`);
+
+--
+-- Ograniczenia dla tabeli `ksiegarnia_ksiazka`
+--
+ALTER TABLE `ksiegarnia_ksiazka`
+  ADD CONSTRAINT `for_k_ksieg_ksiazka_ksiazka` FOREIGN KEY (`id_ksiazki`) REFERENCES `ksiazka` (`id_ksiazki`) ON DELETE CASCADE,
+  ADD CONSTRAINT `for_k_ksieg_ksiazka_ksieg` FOREIGN KEY (`id_ksiegarni`) REFERENCES `ksiegarnie` (`id_ksiegarni`) ON DELETE CASCADE;
 
 --
 -- Ograniczenia dla tabeli `ksiegarnie`

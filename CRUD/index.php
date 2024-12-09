@@ -16,12 +16,10 @@
     <h3>Edycja</h1>
     <a href="edit_ksiazka.php">Edytuj książkę</a>
     <a href="edit_ksiegarnia.php">Edytuj księgarnię</a>
-    <a href="edit_miasto.php">Edytuj miejscowość</a>
     <hr>
     <h3>Usuwanie</h1>
     <a href="delete_ksiazka.php">Usuń książkę</a>
     <a href="delete_ksiegarnia.php">Usuń księgarnię</a>
-    <a href="delete_miasto.php">Usuń miejscowość</a>
     <hr>
 </body>
 </html>

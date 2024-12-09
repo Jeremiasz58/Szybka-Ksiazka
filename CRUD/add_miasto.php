@@ -1,3 +1,13 @@
+<?php
+    $con = mysqli_connect("localhost","root","","sk_db");
+    if ($con -> connect_errno) {
+        echo "Failed to connect to MySQL: " . $con -> connect_error;
+        exit();
+      }else{
+
+        echo "Połączenie działa.";
+      }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,16 +27,36 @@
 
     </form>
 
-    <?php
-    $con = mysqli_connect("localhost","root","","sk_db");
-    if ($con -> connect_errno) {
-        echo "Failed to connect to MySQL: " . $con -> connect_error;
-        exit();
-      }else{
+    <table>
+<tr>
+<th>Id miasta</th>
+  <th>Nazwa</th>
+  <th>Id województwa</th>
+</tr>
 
-        echo "Połączenie działa.";
-      }
+<?php
+// Rekordy:
+      $sql_table_q = "select * from miasta" ;
+      $miasta = $con->query($sql_table_q);
+      while($rekord = $miasta->fetch_assoc()){
+        echo "<tr>";
+        echo "
+        <td>" . $rekord['id_miasta'] . "</td>
+        <td>" . $rekord['nazwa'] . "</td>
+        <td>" . $rekord['id_woj'] . "</td>";
+        echo "</tr>";
+      } 
 
+// ---
+?>
+
+</table>
+<button><a href="index.php">Powrót</a></button>
+<button><a href="add_miasto.php">Odśwież</a></button>
+
+
+
+<?php
       if (isset($_POST['nazwa'])) {
         $sql_q = "insert into miasta values(null, " . "'" .$_POST['nazwa'] . "'," . $_POST['woj'] . ")" ;
         if ($con->query($sql_q) === TRUE) {

@@ -1,10 +1,43 @@
-.c-img {
-    width: 50%;
-    height: auto;
-    object-fit: cover;
+@import url('https://fonts.googleapis.com/css?family=Clicker+Script');
+
+body {
+    background-color: black;
+
 }
 
-.c-item {
-    width: 700px;
-    height: auto;
+
+* {
+    color: white;
+    font-family: "Clicker Script", cursive;
+}
+
+fieldset {
+    color: white;
+    background-color: rgb(40, 40, 40);
+    border: white solid 1px;
+}
+
+h1 {
+    font-size: 5vw;
+
+}
+
+h2 {
+    font-size: 3vw;
+
+}
+
+h3 {
+    font-size: 2vw;
+
+}
+
+h4 {
+    font-size: 1.5vw;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+    font-size: 1vw;
 }

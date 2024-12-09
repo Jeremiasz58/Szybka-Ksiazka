@@ -9,8 +9,9 @@
     <nav>
         <a href="index.php">Strona główna</a>
         <a href="daily.php">Książka dnia</a>
-        <a href="ksiegarnie.php">Lista księgarni</a>
         <a href="o_nas.php">O nas</a>
+        <a href="spis_ksiegarni.php">Spis księgarni</a>
+        <a href="wyszukiwanie.php">Wyszukiwanie</a>
     </nav>
     <main>
         <header>
